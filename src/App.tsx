@@ -442,13 +442,13 @@ function GraphCanvas({
               />
               <rect
                 className={isSelected ? "time-label selected" : "time-label"}
-                height="7.4"
-                rx="2.4"
-                width="15"
-                x={midpoint.x - 7.5}
-                y={midpoint.y - 3.7}
+                height="5.6"
+                rx="1.8"
+                width="11.8"
+                x={midpoint.x - 5.9}
+                y={midpoint.y - 2.8}
               />
-              <text className="time-text" textAnchor="middle" x={midpoint.x} y={midpoint.y + 1.35}>
+              <text className="time-text" textAnchor="middle" x={midpoint.x} y={midpoint.y + 0.95}>
                 {formatNumber(edge.weight)} min
               </text>
             </g>
@@ -478,9 +478,6 @@ function GraphCanvas({
               <circle className="intersection-core" cx={vertex.x} cy={vertex.y} r="4.35" />
               <text className="intersection-icon" textAnchor="middle" x={vertex.x} y={vertex.y - 0.85}>
                 {vertex.icon}
-              </text>
-              <text className="intersection-label" textAnchor="middle" x={vertex.x} y={vertex.y + 8.5}>
-                {vertex.label}
               </text>
             </g>
           );

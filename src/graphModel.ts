@@ -49,13 +49,13 @@ export type ShortestPathResult = {
 };
 
 export const initialVertices: Vertex[] = [
-  { id: "A", label: "School", icon: "🏫", x: 16, y: 45 },
-  { id: "B", label: "Café", icon: "☕", x: 50, y: 16 },
-  { id: "C", label: "Buildings", icon: "🏢", x: 50, y: 45 },
-  { id: "D", label: "Train Station", icon: "🚉", x: 50, y: 70 },
-  { id: "E", label: "Cinema", icon: "🎬", x: 84, y: 45 },
-  { id: "F", label: "Burger Restaurant", icon: "🍔", x: 76, y: 88 },
-  { id: "G", label: "Playground", icon: "🛝", x: 24, y: 88 },
+  { id: "A", label: "School", icon: "🏫", x: 9, y: 48 },
+  { id: "B", label: "Café", icon: "☕", x: 39, y: 22 },
+  { id: "C", label: "Buildings", icon: "🏢", x: 39, y: 48 },
+  { id: "D", label: "Train Station", icon: "🚉", x: 58, y: 66 },
+  { id: "E", label: "Cinema", icon: "🎬", x: 70, y: 48 },
+  { id: "F", label: "Burger Restaurant", icon: "🍔", x: 91, y: 72 },
+  { id: "G", label: "Playground", icon: "🛝", x: 29, y: 78 },
 ];
 
 export const initialEdges: Edge[] = [
