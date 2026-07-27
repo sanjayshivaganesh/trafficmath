@@ -25,7 +25,6 @@ import {
   edgeKey,
   enumeratePaths,
   formatNumber,
-  formatPath,
   formatPlacePath,
   initialEdges,
   initialVertices,
@@ -71,6 +70,12 @@ const edgeLine = (edge: Edge, vertices: Vertex[]) => {
   const from = vertices.find((vertex) => vertex.id === edge.from)!;
   const to = vertices.find((vertex) => vertex.id === edge.to)!;
   return { from, to };
+};
+
+const placeDisplay = (vertices: Vertex[], id: VertexId | null | undefined) => {
+  if (!id) return "—";
+  const vertex = vertices.find((candidate) => candidate.id === id);
+  return vertex ? `${vertex.icon} ${vertex.label}` : id;
 };
 
 function App() {
@@ -291,6 +296,7 @@ function App() {
 
           <AlgorithmPanel
             currentStep={currentStep}
+            edges={weighted}
             isOpen={isAlgorithmOpen}
             isPlaying={isPlayingAlgorithm}
             onClose={() => {
@@ -595,6 +601,7 @@ function VariableControl({
 
 function AlgorithmPanel({
   currentStep,
+  edges,
   isOpen,
   isPlaying,
   onClose,
@@ -606,6 +613,7 @@ function AlgorithmPanel({
   vertices,
 }: {
   currentStep: ReturnType<typeof dijkstra>["iterations"][number] | undefined;
+  edges: WeightedEdge[];
   isOpen: boolean;
   isPlaying: boolean;
   onClose: () => void;
@@ -619,6 +627,11 @@ function AlgorithmPanel({
   if (!isOpen || !currentStep) return null;
 
   const changedRelaxation = currentStep.relaxations.find((relaxation) => relaxation.changed);
+  const displayedRelaxation = changedRelaxation ?? currentStep.relaxations[0];
+  const relaxedRoad = displayedRelaxation
+    ? edges.find((edge) => edge.id === displayedRelaxation.edge)
+    : undefined;
+  const visitedPlaces = currentStep.visited.map((vertex) => placeDisplay(vertices, vertex)).join(", ");
 
   return (
     <motion.section animate={{ opacity: 1, y: 0 }} className="algorithm-card" initial={{ opacity: 0, y: 14 }}>
@@ -634,14 +647,15 @@ function AlgorithmPanel({
         </button>
       </div>
       <div className="algorithm-focus">
-        <MiniStat label="Current Node" value={currentStep.current ?? "—"} />
-        <MiniStat label="Visited Nodes" value={currentStep.visited.join(", ")} />
-        <MiniStat label="Relaxed Edge" value={changedRelaxation?.edge ?? currentStep.relaxations[0]?.edge ?? "None"} />
+        <MiniStat label="Current Stop" value={placeDisplay(vertices, currentStep.current)} />
+        <MiniStat label="Visited Stops" value={visitedPlaces || "None"} />
+        <MiniStat label="Checked Road" value={relaxedRoad ? roadName(relaxedRoad) : "None"} />
       </div>
       <div className="distance-strip">
         {vertices.map((vertex) => (
           <span key={vertex.id}>
-            d({vertex.id}) <strong>{formatNumber(currentStep.distancesAfter[vertex.id])}</strong>
+            <em>{vertex.icon} {vertex.label}</em>
+            <strong>{formatNumber(currentStep.distancesAfter[vertex.id])} min</strong>
           </span>
         ))}
       </div>
@@ -649,7 +663,7 @@ function AlgorithmPanel({
         {changedRelaxation ? (
           <>
             <ArrowRight size={18} />
-            d({changedRelaxation.to}) = {formatNumber(changedRelaxation.candidate)}
+            {placeDisplay(vertices, changedRelaxation.to)} becomes {formatNumber(changedRelaxation.candidate)} min
           </>
         ) : (
           "No distance improved this step"
