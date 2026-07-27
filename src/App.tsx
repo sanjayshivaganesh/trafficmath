@@ -647,9 +647,9 @@ function AlgorithmPanel({
         </button>
       </div>
       <div className="algorithm-focus">
-        <MiniStat label="Current Stop" value={placeDisplay(vertices, currentStep.current)} />
-        <MiniStat label="Visited Stops" value={visitedPlaces || "None"} />
-        <MiniStat label="Checked Road" value={relaxedRoad ? roadName(relaxedRoad) : "None"} />
+        <MiniStat className="algorithm-fact" label="Current Stop" value={placeDisplay(vertices, currentStep.current)} />
+        <MiniStat className="algorithm-fact" label="Visited Stops" value={visitedPlaces || "None"} />
+        <MiniStat className="algorithm-fact" label="Checked Road" value={relaxedRoad ? roadName(relaxedRoad) : "None"} />
       </div>
       <div className="distance-strip">
         {vertices.map((vertex) => (
@@ -694,9 +694,9 @@ function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; 
   );
 }
 
-function MiniStat({ label, value }: { label: string; value: string | number }) {
+function MiniStat({ className = "", label, value }: { className?: string; label: string; value: string | number }) {
   return (
-    <div className="mini-stat">
+    <div className={className ? `mini-stat ${className}` : "mini-stat"}>
       <span>{label}</span>
       <strong>{value}</strong>
     </div>

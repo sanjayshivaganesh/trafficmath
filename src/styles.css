@@ -469,6 +469,11 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.algorithm-card .algorithm-focus {
+  gap: 0.7rem;
+  grid-template-columns: 1fr;
+}
+
 .mini-stat {
   background: #f7f9fc;
   border: 1px solid #e2eaf2;
@@ -484,6 +489,18 @@ button {
   line-height: 1.15;
   margin-top: 0.25rem;
   overflow-wrap: anywhere;
+}
+
+.algorithm-fact {
+  min-height: auto;
+  padding: 0.8rem 0.9rem;
+}
+
+.algorithm-fact strong {
+  font-size: 1.02rem;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .congestion-status {
