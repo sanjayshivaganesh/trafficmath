@@ -67,7 +67,7 @@ export const initialEdges: Edge[] = [
   { id: "DF", from: "D", to: "F", baseTime: 6, congestion: 1 },
   { id: "DG", from: "D", to: "G", baseTime: 6, congestion: 1 },
   { id: "EF", from: "E", to: "F", baseTime: 8, congestion: 1 },
-  { id: "GF", from: "G", to: "F", baseTime: 9, congestion: 1.1 },
+  { id: "GF", from: "G", to: "F", baseTime: 9, congestion: 1 },
 ];
 
 export const sourceVertex: VertexId = "A";
